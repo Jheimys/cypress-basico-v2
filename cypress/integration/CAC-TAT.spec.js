@@ -55,11 +55,11 @@ describe('Central de Atendimento ao Cliente TAT', () => {
         cy.get('#phone').type('abcdefj').should('have.value', '')
     })
 
-    it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', () => {
+    it.only('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', () => {
         cy.get('#firstName').type('James')
         cy.get('#lastName').type('Bassani')
         cy.get('#email').type('james@email.com')
-        cy.get('#phone-checkbox').click()
+        cy.get('#phone-checkbox').check()
         cy.get('#open-text-area').type('O Cypress é bem legal')
         cy.contains('button', 'Enviar').click()
         cy.get('.error').should('be.visible')
@@ -126,13 +126,22 @@ describe('Central de Atendimento ao Cliente TAT', () => {
             .should('have.value', 'feedback')
     })
 
-    it.only('marca cada tipo de atendimento', () => {
-         cy.get('input[type="radio"]')
+    it('marca cada tipo de atendimento', () => {
+        cy.get('input[type="radio"]')
             .should('have.length', 3)
             .each(($radio) => {
                 cy.wrap($radio).check()
                 cy.wrap($radio).should('be.checked')
             })
+    })
+
+    it('marca ambos checkboxes, depois desmarca o último', () => {
+        cy.get('input[type="checkbox"]')
+            .check()
+            .should('be.checked')
+            .last()
+            .uncheck()
+            .should('not.be.checked')
     })
 
 })
