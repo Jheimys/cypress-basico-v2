@@ -32,7 +32,7 @@ Or, run `npm run cy:open: mobile` to open Cypress in interactive mode on mobile 
 
 ## Support this project
 
-If you want to support this project, leave a ⭐.
+If you want to support this project, leave a ⭐
 
 ___
 
